@@ -43,9 +43,11 @@ Isso gera `target/aula03.war`. Copie o `.war` para a pasta `webapps/` do Tomcat 
 
 Acesse: `http://localhost:8080/aula03/`
 
-## Sobre as versões no pom.xml
+## Dependências no pom.xml
 
-- `mysql-connector-j:26.7.0` — confirmado que essa versão existe de fato (não é erro de digitação).
-- `maven.compiler.release` — ajuste para o que `java -version` mostrar na sua máquina.
-- JSTL (`jakarta.servlet.jsp.jstl`) — necessária para as tags `<c:forEach>`/`<c:if>` das JSPs.
-- `jbcrypt` — usado por `SenhaUtil` para hash/verificação de senha (aula 04).
+- `mysql-connector-j` — driver JDBC para conectar no MySQL.
+- `jakarta.servlet-api` — API de servlets do Tomcat 11 (`provided`: já vem com o servidor).
+- JSTL (`jakarta.servlet.jsp.jstl`) — tags `<c:forEach>`/`<c:if>` usadas nas JSPs.
+- `jbcrypt` — usado por `SenhaUtil` para criptografar e verificar senha (aula 04).
+
+Se o build der erro de versão de Java, ajuste `maven.compiler.release` no `pom.xml` para a versão mostrada por `java -version`.

@@ -5,7 +5,7 @@
     https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"
     version="6.1">
 
-    <display-name>Aula03</display-name>
+    <display-name>Java Web - Aulas 01 a 04</display-name>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

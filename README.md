@@ -1,4 +1,11 @@
-# Java Web — Aulas 01 a 04
+# Java Web — Aulas 01 a 08
+
+| Pasta | Aulas | Conteúdo |
+|---|---|---|
+| raiz (este README) | 01–04 | Servlet/JSP + JDBC, Tomcat 11, banco `cantina` |
+| [`aula05-08-spring-imoveis/`](aula05-08-spring-imoveis/) | 05–08 | Spring Boot 4.1.1 + Spring Data JPA, API REST de imóveis (`/bairros`, `/tiposimoveis`, `/imoveis`), banco `restaurante` — ver o [README próprio](aula05-08-spring-imoveis/README.md) |
+
+## Aulas 01 a 04 (raiz)
 
 Projeto Maven `war` (Servlet 6.1 / Tomcat 11) da disciplina de Java Web, reaproveitando o código real do `ProjetoI` (aulas 1 e 2) e implementando as atividades das aulas 03 e 04.
 

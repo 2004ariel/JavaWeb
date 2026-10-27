@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Credenciais locais ###
+mail.properties
+uploads/

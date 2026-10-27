@@ -37,10 +37,10 @@ public class ImovelModel implements Serializable {
     @Column(columnDefinition = "text")
     private String descricao;
 
-    @Column(precision = 10, scale = 2)
+    @Column(name = "preco_venda", precision = 15, scale = 2)
     private BigDecimal precoVenda;
 
-    @Column(precision = 10, scale = 2)
+    @Column(name = "preco_aluguel", precision = 15, scale = 2)
     private BigDecimal precoAluguel;
 
     private String finalidade;
@@ -49,12 +49,13 @@ public class ImovelModel implements Serializable {
     private Integer banheiros;
     private Integer garagem;
 
-    @Column(precision = 10, scale = 2)
+    @Column(name = "area_total", precision = 15, scale = 2)
     private BigDecimal areaTotal;
 
-    @Column(precision = 10, scale = 2)
+    @Column(name = "area_construida", precision = 15, scale = 2)
     private BigDecimal areaConstruida;
 
+    // Endereço
     private String endereco;
     private String numero;
     private String complemento;

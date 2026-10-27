@@ -2,12 +2,15 @@ package com.example.demo.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.dtos.SaberMaisDTO;
 import com.example.demo.models.ImovelModel;
+import com.example.demo.services.EmailService;
 import com.example.demo.services.ImovelService;
 
 @RestController
@@ -15,9 +18,11 @@ import com.example.demo.services.ImovelService;
 public class ImovelController {
 
     private final ImovelService service;
+    private final EmailService emailService;
 
-    public ImovelController(ImovelService service) {
+    public ImovelController(ImovelService service, EmailService emailService) {
         this.service = service;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -56,5 +61,31 @@ public class ImovelController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // cliente quer saber mais sobre o imóvel -> envia email com template
+    @PostMapping(value = "/sabermais/{id}")
+    public ResponseEntity<String> saberMais(@PathVariable Integer id, @RequestBody SaberMaisDTO dto) {
+        ImovelModel imovel = service.find(id);
+        if (imovel == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        try {
+            emailService.enviarEmailComTemplate(
+                dto.getEmail(),
+                "Informações sobre o imóvel",
+                "email/sabermais",
+                Map.of(
+                    "cliente", dto,
+                    "imovel", imovel,
+                    "mensagem", "Obrigado pelo interesse! Em breve um corretor vai entrar em contato."
+                ));
+
+            return ResponseEntity.ok("Enviado");
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

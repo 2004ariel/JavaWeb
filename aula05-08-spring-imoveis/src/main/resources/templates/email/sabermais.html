@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="font-family: Arial, sans-serif;">
+    <div style="padding: 20px;">
+        <h2>
+            Olá, <span th:text="${cliente.nome}">Cliente</span>!
+        </h2>
+
+        <p th:text="${mensagem}">Mensagem da imobiliária</p>
+
+        <h3 th:text="${imovel.titulo}">Título do imóvel</h3>
+        <ul>
+            <li>Descrição: <span th:text="${imovel.descricao}"></span></li>
+            <li>Preço de venda: R$ <span th:text="${imovel.precoVenda}"></span></li>
+            <li>Preço de aluguel: R$ <span th:text="${imovel.precoAluguel}"></span></li>
+            <li>Dormitórios: <span th:text="${imovel.dormitorios}"></span></li>
+            <li>Banheiros: <span th:text="${imovel.banheiros}"></span></li>
+            <li>Garagem: <span th:text="${imovel.garagem}"></span></li>
+            <li>Endereço: <span th:text="${imovel.endereco + ', ' + imovel.numero}"></span></li>
+            <li>Bairro: <span th:text="${imovel.bairro?.nome}"></span></li>
+        </ul>
+
+        <h3>Seus dados</h3>
+        <ul>
+            <li>Telefone: <span th:text="${cliente.telefone}"></span></li>
+            <li>Email: <span th:text="${cliente.email}"></span></li>
+            <li>Mensagem: <span th:text="${cliente.mensagem}"></span></li>
+        </ul>
+    </div>
+</body>
+</html>

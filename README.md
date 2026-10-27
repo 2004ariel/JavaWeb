@@ -1,9 +1,9 @@
-# Java Web — Aulas 01 a 08
+# Java Web — Aulas 01 a 11
 
 | Pasta | Aulas | Conteúdo |
 |---|---|---|
 | raiz (este README) | 01–04 | Servlet/JSP + JDBC, Tomcat 11, banco `cantina` |
-| [`aula05-08-spring-imoveis/`](aula05-08-spring-imoveis/) | 05–08 | Spring Boot 4.1.1 + Spring Data JPA, API REST de imóveis (`/bairros`, `/tiposimoveis`, `/imoveis`), banco `restaurante` — ver o [README próprio](aula05-08-spring-imoveis/README.md) |
+| [`aula05-08-spring-imoveis/`](aula05-08-spring-imoveis/) | 05–11 | Spring Boot 4.1.1 + Spring Data JPA, API REST de imóveis (`/bairros`, `/tiposimoveis`, `/imoveis`), upload de fotos (09), email com Mailgun/Thymeleaf (10) e autenticação/autorização com JWT (11), banco `restaurante` — ver o [README próprio](aula05-08-spring-imoveis/README.md) |
 
 ## Aulas 01 a 04 (raiz)
 

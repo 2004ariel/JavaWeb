@@ -1,0 +1,146 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-10-27T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_imoveis_jwt",
+      "_type": "workspace",
+      "parentId": null,
+      "name": "Imóveis JWT",
+      "description": "Aula 11 - autenticação e autorização com JWT",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "token": "",
+        "imovel_id": "1"
+      }
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "1. POST /public/register",
+      "method": "POST",
+      "url": "{{ _.base_url }}/public/register",
+      "metaSortKey": -600,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Admin teste\",\n  \"email\": \"admin@t.com\",\n  \"password\": \"1234\",\n  \"role\": \"ADMIN\"\n}"
+      },
+      "authentication": {}
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "2. POST /public/login (copie o token para a variável token)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/public/login",
+      "metaSortKey": -500,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@t.com\",\n  \"password\": \"1234\"\n}"
+      },
+      "authentication": {}
+    },
+    {
+      "_id": "req_users",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "3. GET /users (ADMIN)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users",
+      "metaSortKey": -400,
+      "headers": [],
+      "parameters": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    },
+    {
+      "_id": "req_imoveis_get",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "4. GET /imoveis (público)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/imoveis",
+      "metaSortKey": -300,
+      "headers": [],
+      "parameters": [],
+      "body": {},
+      "authentication": {}
+    },
+    {
+      "_id": "req_imoveis_post",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "5. POST /imoveis (ADMIN)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/imoveis",
+      "metaSortKey": -200,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"titulo\": \"Casa de teste JWT\",\n  \"precoVenda\": 450000.0,\n  \"finalidade\": \"VENDA\",\n  \"status\": \"DISPONIVEL\",\n  \"dormitorios\": 3,\n  \"banheiros\": 2,\n  \"garagem\": 1,\n  \"endereco\": \"Rua das Flores\",\n  \"numero\": \"100\",\n  \"cep\": \"98280-000\",\n  \"destaque\": false,\n  \"tipoImovel\": {\n    \"id\": 1\n  },\n  \"bairro\": {\n    \"id\": 1\n  }\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    },
+    {
+      "_id": "req_imoveis_status",
+      "_type": "request",
+      "parentId": "wrk_imoveis_jwt",
+      "name": "6. PATCH /imoveis/{id}/status (autenticado)",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/imoveis/{{ _.imovel_id }}/status",
+      "metaSortKey": -100,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"VENDIDO\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    }
+  ]
+}

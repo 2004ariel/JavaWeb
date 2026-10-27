@@ -57,6 +57,15 @@ public class ImovelController {
         return ResponseEntity.noContent().build();
     }
 
+    // qualquer usuário autenticado pode alterar: body {"status": "VENDIDO"}
+    @PatchMapping(value = "/{id}/status")
+    public ResponseEntity<Void> updateStatus(@PathVariable Integer id, @RequestBody Map<String, String> body) {
+        if (service.updateStatus(id, body.get("status")) == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);

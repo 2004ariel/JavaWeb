@@ -35,6 +35,13 @@ public class ImovelService {
         return null;
     }
 
+    public ImovelModel updateStatus(Integer id, String status) {
+        ImovelModel model = find(id);
+        if (model == null) return null;
+        model.setStatus(status);
+        return repository.save(model);
+    }
+
     public void delete(Integer id) {
         repository.deleteById(id);
     }

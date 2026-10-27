@@ -9,10 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.services.JwtService;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,12 +35,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (header != null && header.startsWith("Bearer ")) {
             try {
-                Claims claims = jwtService.parse(header.substring(7));
-                var authority = new SimpleGrantedAuthority("ROLE_" + claims.get("role", String.class));
-                var auth = new UsernamePasswordAuthenticationToken(claims.getSubject(), null, List.of(authority));
+                DecodedJWT jwt = jwtService.parse(header.substring(7));
+                var authority = new SimpleGrantedAuthority("ROLE_" + jwt.getClaim("role").asString());
+                var auth = new UsernamePasswordAuthenticationToken(jwt.getSubject(), null, List.of(authority));
                 SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (JwtException | IllegalArgumentException e) {
-                // token inválido/expirado: segue sem autenticação e o EntryPoint responde 401
+            } catch (JWTVerificationException e) {
+                // assinatura errada, expirado ou malformado: segue sem autenticação e o EntryPoint responde 401
                 SecurityContextHolder.clearContext();
             }
         }
